@@ -8,6 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import DeleteTask from '../UseCase/DeleteTask/DeleteTask';
+import DeleteAllTasks from '../UseCase/DeleteAllTasks/DeleteAllTasks';
 import GetAllTasksUseCase from '../UseCase/GetAllTasks/GetAllTasksUseCase';
 import SaveTaskDto from '../UseCase/SaveTask/SaveTaskDto';
 import UseCaseFactory from '../UseCase/UseCaseFactory';
@@ -37,5 +38,10 @@ export default class TaskController {
   @Delete('/tasks/:id')
   async delete(@Param('id') id: string) {
     return (await this.useCaseFactory.create(DeleteTask)).handle(Number(id));
+  }
+
+  @Delete('/tasks')
+  async deleteAll() {
+    return (await this.useCaseFactory.create(DeleteAllTasks)).handle();
   }
 }

@@ -17,6 +17,9 @@ export default class TaskRepository {
       },
     });
   }
+  async deleteAll() {
+    return this.prisma.task.deleteMany();
+  }
 
   async save(
     data:
