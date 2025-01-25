@@ -13,15 +13,14 @@ export default class CreateTask
   async handle(dto: SaveTaskDto): Promise<Task> {
     try {
       if (!dto.name || dto.name.trim() === '') {
-        throw new BadRequestException('Task name cannot be empty.');
       }
       const task = await this.taskRepository.save({
         name: dto.name,
       });
 
       return task;
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    } catch (err) {
+      throw new BadRequestException(err.message);
     }
   }
 }
